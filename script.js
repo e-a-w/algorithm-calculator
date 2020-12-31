@@ -23,16 +23,21 @@ class RuntimeCalc extends Calculator {
     return Math.log(n) / Math.log(base);
   }
 
-  // factorial() {
-  //   let n = this.value;
+  factorial() {
+    let n = this.value;
+    let i = this.value;
 
-  //   while (n > 0) {
-  //     n *= n - 1;
-  //     n--;
-  //   }
+    if (n === 1 || n === 0) {
+      return 1;
+    }
 
-  //   return n;
-  // }
+    while (n > 1) {
+      n--;
+      i *= n;
+    }
+
+    return i;
+  }
 
   calculate() {
     const c = Calculator.calculators[0].value;
@@ -42,7 +47,7 @@ class RuntimeCalc extends Calculator {
     counters.push(this.logN(this.value).toFixed(5));
     counters.push(this.value ** 2);
     counters.push(this.value * this.logN(this.value).toFixed(5));
-    // counters.push(this.factorial());
+    counters.push(this.factorial());
     return counters;
   }
 }

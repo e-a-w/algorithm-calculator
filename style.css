@@ -110,6 +110,11 @@ header {
   box-shadow: 0px 10px 6px -7px #000000;
 }
 
+#header-calcs {
+  display: flex;
+  gap: 20px;
+}
+
 @media only screen and (min-width: 900px) {
   body {
     display: grid;
@@ -125,6 +130,15 @@ header {
     box-shadow: 5px 0px 4px -3px #000000;
     background: rgba(255, 255, 255, 0.85);
   }
+
+  #header-calcs {
+    flex-direction: column;
+  }
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
 }
 
 .minus,

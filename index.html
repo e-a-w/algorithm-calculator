@@ -12,29 +12,35 @@
 	<header>
 		<h1>O(n) Calculator</h1>
 		<p>Change the input size to see how many times each code block runs!</p>
-		<h4 id="input-size-h4">Input Size: <span class="output-0"></span></h4>
+    
+    <div id="header-calcs">
+      <div class="calculator">
+        <h4 id="input-size-h4">Input Size: <span class="output-0"></span></h4>
+        <div id="controls">
+          <button class="minus" type="button">-</button>
+          <input id="input-size" class="calc-input" type="number"/>
+          <button class="plus" type="button">+</button>
+          <p class="error"></p>
+        </div>
+      </div>
 
-  	<div id="controls" class="calculator">
-      <button class="minus" type="button">-</button>
-      <input id="input-size" class="calc-input" type="number"/>
-      <button class="plus" type="button">+</button>
-      <p class="error"></p>
+      <div class="calculator">
+        <h4 id="input-size-h4">Constant: <span class="output-1"></span></h4>
+        <div id="constant-calculator">
+          <button class="minus" type="button">-</button>
+          <input class="calc-input" type="number"/>
+          <button class="plus" type="button">+</button>
+          <p class="error"></p>
+        </div>
+      </div>
     </div>
 
-    <h4 id="input-size-h4">Constant: <span class="output-1"></span></h4>
-
-  	<div id="constant-calculator" class="calculator">
-      <button class="minus" type="button">-</button>
-      <input class="calc-input" type="number"/>
-      <button class="plus" type="button">+</button>
-      <p class="error"></p>
-    </div>
   </header>
 
   <section id="code-container">
   
   <div class="code">
-    <h2>O(1) -- Constant time</h2>
+    <h2>O(1) -- Constant</h2>
 
     <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span> and constant <span class="output-1"><span>.</h4>
 
@@ -44,7 +50,7 @@
   </div>
 
   <div class="code">
-    <h2>O(n) -- Linear time</h2>
+    <h2>O(n) -- Linear</h2>
 
     <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span>.</h4>
 
@@ -57,7 +63,7 @@ for (let i = 0; i < array.length; i++) {
   </div>
 
   <div class="code">
-    <h2>O(log n)</h2>
+    <h2>O(log n) -- Logarithmic</h2>
 
     <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span>.</h4>
 
@@ -65,7 +71,7 @@ for (let i = 0; i < array.length; i++) {
     <p>This is the binary logarithm (log<sub>2</sub><i>n</i>), used in the common algorithm <a href="https://www.geeksforgeeks.org/complexity-analysis-of-binary-search/" target="_blank" ref="noopener noreferrer">Binary Search</a>. (See <a href="https://en.wikipedia.org/wiki/Binary_logarithm#Computational_complexity" target="_blank" ref="noopener noreferrer">here</a> for more explanation about why bases are dropped from Big O notation!)</p>
     <p>If you would like to adjust the base, you can do so with the mini calculator below:</p>
 
-    <div class="calculator log-calculator">
+    <div class="log-calculator">
       <div>
         <span class="log">log<sub class="output-2">2</sub><i class="output-0"></i></span>
         runs
@@ -85,7 +91,7 @@ for (let i = 0; i < array.length; i++) {
   </div>
 
   <div class="code">
-    <h2>O(n<sup>2</sup>)</h2>
+    <h2>O(n<sup>2</sup>) -- Quadratic</h2>
     
     <h4>Runs <span class="calculation-0">1</span> times for an input of size <span class="output-0"></span>.</h4>
 
@@ -101,14 +107,14 @@ for (let i = 0; i < arr.length; i++) {
   </div>
 
   <div class="code">
-    <h2>O(n log n)</h2>
+    <h2>O(n log n) -- Log Linear</h2>
     
     <h4>Runs <span class="calculation-0">1</span> times for an input of size <span class="output-0"></span>.</h4>
 
     <h3>Notes:</h3>
     <p>Algorithms of O(n log n) include <a href="https://www.educative.io/edpresso/nlogn-sorting-algorithms" target="_blank" ref="nopenner noreferrer">Merge Sort & Heap Sort</a>. The calculation above uses a default of base 2, but you can use the mini calculator below to play with adjusting that!</p>
 
-    <div  class="calculator log-calculator">
+    <div  class="log-calculator">
       <div>
         <span class="output-0"></span>
         <span class="log">log<sub class="output-3">2</sub><i class="output-0"></i></span>
@@ -129,12 +135,12 @@ for (let i = 0; i < arr.length; i++) {
   </div>
 
   <div class="code">
-    <h2>O(n!)</h2>
+    <h2>O(n!) -- Factorial</h2>
     
-    <h4>Runs <span class="calculation-0">1</span> times for an input of size <span class="output-0"></span>.</h4>
+    <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span>.</h4>
 
-    <h3>Sample Code:</h3>
-    <p>factorial </p>
+    <h3>About:</h3>
+    <p>Ouch, this one gets very slow very fast. You'll notice how quickly the calculation above hits "Infinity", because Javascript just can't calculate a number that large. <a href="https://jarednielsen.com/big-o-factorial-time-complexity/" target="_blank" ref="noopener noreferrer">Here</a> is a great article about some unlucky problems that might require n! to solve.</p>
   </div>
   
   </section>
