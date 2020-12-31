@@ -12,10 +12,10 @@
 	<header>
 		<h1>O(n) Calculator</h1>
 		<p>Change the input size to see how many times each code block runs!</p>
-    
-    <div id="header-calcs">
-      <div class="calculator">
-        <h4 id="input-size-h4">Input Size: <span class="output-0"></span></h4>
+
+		<div id="header-calcs">
+			<div class="calculator">
+				<h4 id="input-size-h4">Input Size: <span class="output-0"></span></h4>
         <div id="controls">
           <button class="minus" type="button">-</button>
           <input id="input-size" class="calc-input" type="number"/>
@@ -35,6 +35,51 @@
       </div>
     </div>
 
+    <table id="calc-table">
+      <tbody>
+      <tr>
+        <td>O(1)</td>
+        <td>constant</td>
+        <td class="calculation-0"></td>
+      </tr>
+      <tr>
+        <td>O(log n)</td>
+        <td>logarithmic</td>
+        <td class="calculation-0"></td>
+      </tr>
+      <tr>
+        <td>O(n)</td>
+        <td>linear</td>
+        <td class="calculation-0"></td>
+      </tr>
+      <tr>
+        <td>O(n log n)</td>
+        <td>log linear</td>
+        <td class="calculation-0"></td>
+      </tr>
+      <tr>
+        <td>O(n<sup>2</sup>)</td>
+        <td>quadratic</td>
+        <td class="calculation-0"></td>
+      </tr>
+      <tr>
+        <td>O(n<sup>3</sup>)</td>
+        <td>cubic</td>
+        <td class="calculation-0"></td>
+      </tr>
+      <tr>
+        <td>O(2<sup>n</sup>)</td>
+        <td>exponential</td>
+        <td class="calculation-0"></td>
+      </tr>
+      <tr>
+        <td>O(n!)</td>
+        <td>factorial</td>
+        <td class="calculation-0"></td>
+      </tr>
+      </tbody>
+    </table>
+
   </header>
 
   <section id="code-container">
@@ -47,19 +92,6 @@
     <h3>Sample Code:</h3>
     <p>This accesses the last element of an array.</p>
       <pre>array[array.length - 1]</pre>
-  </div>
-
-  <div class="code">
-    <h2>O(n) -- Linear</h2>
-
-    <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span>.</h4>
-
-    <h3>Sample Code:</h3>
-    <p>This iterates through the entire array.</p>
-      <pre>
-for (let i = 0; i < array.length; i++) {
-  console.log(`Loop #${i}`);
-} </pre>
   </div>
 
   <div class="code">
@@ -91,18 +123,15 @@ for (let i = 0; i < array.length; i++) {
   </div>
 
   <div class="code">
-    <h2>O(n<sup>2</sup>) -- Quadratic</h2>
-    
-    <h4>Runs <span class="calculation-0">1</span> times for an input of size <span class="output-0"></span>.</h4>
+    <h2>O(n) -- Linear</h2>
+
+    <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span>.</h4>
 
     <h3>Sample Code:</h3>
-    <p>In this nested loop, the inner loop iterates through the entire array for every iteration of the outer loop.</p>
+    <p>This iterates through the entire array.</p>
       <pre>
-for (let i = 0; i < arr.length; i++) {
-  for (let j = 0; j < arr.length; j++) {
-      n++;
-      console.log(`Loop #${n}`);
-  }
+for (let i = 0; i < array.length; i++) {
+  console.log(`Loop #${i}`);
 } </pre>
   </div>
 
@@ -132,6 +161,68 @@ for (let i = 0; i < arr.length; i++) {
       </div>
 
     </div>
+  </div>
+
+  <div class="code">
+    <h2>O(n<sup>2</sup>) -- Quadratic</h2>
+    
+    <h4>Runs <span class="calculation-0">1</span> times for an input of size <span class="output-0"></span>.</h4>
+
+    <h3>Sample Code:</h3>
+    <p>In this nested loop, the inner loop iterates through the entire array for every iteration of the outer loop.</p>
+      <pre>
+for (let i = 0; i < arr.length; i++) {
+  for (let j = 0; j < arr.length; j++) {
+      n++;
+      console.log(`Loop #${n}`);
+  }
+} </pre>
+  </div>
+
+  <div class="code">
+    <h2>O(n<sup>3</sup>) -- Cubic</h2>
+    
+    <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span>.</h4>
+
+    <h3>Sample Code:</h3>
+    <p>Triply nested loop.</p>
+      <pre>
+for (let i = 0; i < arr.length; i++) {
+  for (let j = 0; j < arr.length; j++) {
+    for (let k = 0; k < arr.length; k++)
+      n++;
+      console.log(`Loop #${n}`);
+    }
+  }
+} </pre>
+  </div>
+
+  <div class="code">
+    <h2>O(2<sup>n</sup>) -- Exponential</h2>
+    
+    <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span>.</h4>
+
+    <h3>About:</h3>
+    <p>The above calculation is set to a default base of 2 (so, O(2<sup><span class="output-0"></span></sup>), but you can use the mini calculator below to play with adjusting it!</p>
+
+    <div  class="log-calculator">
+      <div>
+        O(<span class="output-4"></span><sup><span class="output-0"></span></sup>)
+        runs
+        <span class="calculation-4"></span>
+        times for an input of size
+        <span class="output-0"></span>
+      </div>
+
+      <div>
+      <button class="minus" type="button">-</button>
+      <input class="calc-input" type="number"/>
+      <button class="plus" type="button">+</button>
+      <p class="error"></p>
+      </div>
+
+    </div>
+
   </div>
 
   <div class="code">

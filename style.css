@@ -115,6 +115,10 @@ header {
   gap: 20px;
 }
 
+#calc-table {
+  display: none;
+}
+
 @media only screen and (min-width: 900px) {
   body {
     display: grid;
@@ -126,13 +130,20 @@ header {
   header {
     grid-area: left;
     height: calc(100vh - 30px);
-    width: 300px;
+    width: 350px;
+    overflow-y: scroll;
     box-shadow: 5px 0px 4px -3px #000000;
     background: rgba(255, 255, 255, 0.85);
   }
 
   #header-calcs {
     flex-direction: column;
+  }
+
+  #calc-table {
+    display: table;
+    margin-top: 10px;
+    text-align: left;
   }
 }
 
@@ -143,7 +154,7 @@ header {
 
 .minus,
 .plus {
-  height: 100%;
+  height: 2rem;
   width: 2rem;
   font-size: 1.2rem;
   font-family: "Poppins", sans-serif;
@@ -153,7 +164,7 @@ header {
 }
 
 .calc-input {
-  height: 100%;
+  height: 2rem;
   width: 5rem;
   padding: 0 0.25rem;
   font-size: 1.2rem;
@@ -162,6 +173,7 @@ header {
 }
 
 .error {
+  margin-top: 5px;
   color: red;
 }
 

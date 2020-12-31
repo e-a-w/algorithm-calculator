@@ -1,3 +1,6 @@
-oldscript1.js
-oldscript2.js
+.gitignore
 .DS_Store
+
+# old versions
+/previous/oldscript1.js
+/previous/oldscript2.js
