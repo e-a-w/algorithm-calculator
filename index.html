@@ -1,192 +1,345 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>O(n) Calculator</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<title>O(n) Calculator</title>
-	<link href="style.css" rel="stylesheet" type="text/css" />
-</head>
-
-<body>
-	<header>
-		<h1>O(n) Calculator</h1>
-		<p>Change the input size to see how many times each code block runs!</p>
-
-		<div id="header-calcs">
-			<div class="calculator">
-				<h4 id="input-size-h4">Input Size: <span class="output-0"></span></h4>
-        <div id="controls">
-          <button class="minus" type="button">-</button>
-          <input id="input-size" class="calc-input" type="number"/>
-          <button class="plus" type="button">+</button>
-          <p class="error"></p>
-        </div>
-      </div>
-
-      <div class="calculator">
-        <h4 id="input-size-h4">Constant: <span class="output-1"></span></h4>
-        <div id="constant-calculator">
-          <button class="minus" type="button">-</button>
-          <input class="calc-input" type="number"/>
-          <button class="plus" type="button">+</button>
-          <p class="error"></p>
-        </div>
+  <body>
+    <div id="welcome-modal-container">
+      <div id="welcome-modal">
+        <div id="welcome-close-btn">X</div>
+        <h2>Welcome!</h2>
+        <p>
+          🚧 This project is still a little under construction -- keep checking
+          back for new features!
+        </p>
       </div>
     </div>
 
-    <table id="calc-table">
-      <tbody>
-      <tr>
-        <td>O(1)</td>
-        <td>constant</td>
-        <td class="calculation-0"></td>
-      </tr>
-      <tr>
-        <td>O(log n)</td>
-        <td>logarithmic</td>
-        <td class="calculation-0"></td>
-      </tr>
-      <tr>
-        <td>O(n)</td>
-        <td>linear</td>
-        <td class="calculation-0"></td>
-      </tr>
-      <tr>
-        <td>O(n log n)</td>
-        <td>log linear</td>
-        <td class="calculation-0"></td>
-      </tr>
-      <tr>
-        <td>O(n<sup>2</sup>)</td>
-        <td>quadratic</td>
-        <td class="calculation-0"></td>
-      </tr>
-      <tr>
-        <td>O(n<sup>3</sup>)</td>
-        <td>cubic</td>
-        <td class="calculation-0"></td>
-      </tr>
-      <tr>
-        <td>O(2<sup>n</sup>)</td>
-        <td>exponential</td>
-        <td class="calculation-0"></td>
-      </tr>
-      <tr>
-        <td>O(n!)</td>
-        <td>factorial</td>
-        <td class="calculation-0"></td>
-      </tr>
-      </tbody>
-    </table>
+    <header>
+      <h1>O(n) Calculator</h1>
+      <p>Change the input size and constant to calculate the O(n)!</p>
 
-  </header>
+      <div id="header-calcs">
+        <div id="quick-ref">
+          <h4>+ Quick Reference</h4>
+        </div>
 
-  <section id="code-container">
-  
-  <div class="code">
-    <h2>O(1) -- Constant</h2>
+        <div class="calculator">
+          <h4 id="input-size-h4">
+            Input Size: <span class="output output-0"></span>
+          </h4>
+          <div class="controls">
+            <button class="minus" type="button">-</button>
+            <input id="input-size" class="calc-input" type="number" />
+            <button class="plus" type="button">+</button>
+            <p class="error"></p>
+          </div>
+          <button class="default-btn-0 default">
+            Reset to <span class="default-0"></span>
+          </button>
+        </div>
 
-    <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span> and constant <span class="output-1"><span>.</h4>
-
-    <h3>Sample Code:</h3>
-    <p>This accesses the last element of an array.</p>
-      <pre>array[array.length - 1]</pre>
-  </div>
-
-  <div class="code">
-    <h2>O(log n) -- Logarithmic</h2>
-
-    <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span>.</h4>
-
-    <h3>Note:</h3>
-    <p>This is the binary logarithm (log<sub>2</sub><i>n</i>), used in the common algorithm <a href="https://www.geeksforgeeks.org/complexity-analysis-of-binary-search/" target="_blank" ref="noopener noreferrer">Binary Search</a>. (See <a href="https://en.wikipedia.org/wiki/Binary_logarithm#Computational_complexity" target="_blank" ref="noopener noreferrer">here</a> for more explanation about why bases are dropped from Big O notation!)</p>
-    <p>If you would like to adjust the base, you can do so with the mini calculator below:</p>
-
-    <div class="log-calculator">
-      <div>
-        <span class="log">log<sub class="output-2">2</sub><i class="output-0"></i></span>
-        runs
-        <span class="calculation-2"></span>
-        times for an input of size
-        <span class="output-0"></span>
+        <div class="calculator">
+          <h4 id="input-size-h4">
+            Constant: <span class="constant output-1"></span>
+          </h4>
+          <div class="controls">
+            <button class="minus" type="button">-</button>
+            <input class="calc-input" type="number" />
+            <button class="plus" type="button">+</button>
+            <p class="error"></p>
+          </div>
+          <button class="default-btn-1 default">
+            Reset to <span class="default-1"></span>
+          </button>
+        </div>
       </div>
 
-      <div>
-      <button class="minus" type="button">-</button>
-      <input class="calc-input" type="number"/>
-      <button class="plus" type="button">+</button>
-      <p class="error"></p>
+      <table id="calc-table">
+        <colgroup>
+          <col style="width: 27%" />
+          <col style="width: 28%" />
+          <col style="width: 45%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="3">Quick Reference:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>O(1)</td>
+            <td>constant</td>
+            <td class="calculation-0"></td>
+          </tr>
+          <tr>
+            <td>O(log n)</td>
+            <td>logarithmic</td>
+            <td class="calculation-0"></td>
+          </tr>
+          <tr>
+            <td>O(n)</td>
+            <td>linear</td>
+            <td class="calculation-0"></td>
+          </tr>
+          <tr>
+            <td>O(n log n)</td>
+            <td>log linear</td>
+            <td class="calculation-0"></td>
+          </tr>
+          <tr>
+            <td>O(n<sup>2</sup>)</td>
+            <td>quadratic</td>
+            <td class="calculation-0"></td>
+          </tr>
+          <tr>
+            <td>O(n<sup>3</sup>)</td>
+            <td>cubic</td>
+            <td class="calculation-0"></td>
+          </tr>
+          <tr>
+            <td>O(2<sup>n</sup>)</td>
+            <td>exponential</td>
+            <td class="calculation-0"></td>
+          </tr>
+          <tr>
+            <td>O(n!)</td>
+            <td>factorial</td>
+            <td class="calculation-0"></td>
+          </tr>
+        </tbody>
+      </table>
+    </header>
+
+    <section id="code-container">
+      <div class="code">
+        <h2>O(1) -- Constant</h2>
+
+        <div class="run-calc">
+          <h4>
+            For input size <span class="output output-0"></span> and constant
+            <span class="constant output-1"></span>:
+          </h4>
+          <h3>
+            <span class="formula"
+              >O(<span class="constant output-1"></span>)</span
+            >
+            runs <span class="calc calculation-0"></span> times.
+          </h3>
+        </div>
+
+        <h3>Sample Code:</h3>
+        <p>This accesses the last element of an array.</p>
+        <pre>array[array.length - 1]</pre>
       </div>
 
-    </div>
-  </div>
+      <div class="code">
+        <h2>O(log n) -- Logarithmic</h2>
 
-  <div class="code">
-    <h2>O(n) -- Linear</h2>
+        <div class="run-calc">
+          <h4>
+            For input size <span class="output output-0"></span> and constant
+            <span class="constant output-1"></span>:
+          </h4>
+          <h3>
+            <span class="formula"
+              >O(<span class="constant output-1"></span> log<i
+                class="output output-0"
+              ></i
+              >)</span
+            >
+            runs <span class="calc calculation-0"></span> times.
+          </h3>
+        </div>
 
-    <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span>.</h4>
+        <h3>Note:</h3>
+        <p>
+          This is the binary logarithm (log<sub>2</sub><i>n</i>), used in the
+          common algorithm
+          <a
+            href="https://www.geeksforgeeks.org/complexity-analysis-of-binary-search/"
+            target="_blank"
+            ref="noopener noreferrer"
+            >Binary Search</a
+          >. (See
+          <a
+            href="https://en.wikipedia.org/wiki/Binary_logarithm#Computational_complexity"
+            target="_blank"
+            ref="noopener noreferrer"
+            >here</a
+          >
+          for more explanation about why bases are dropped from Big O notation!)
+        </p>
+        <p>
+          If you would like to play with the math, you can do so with the mini
+          calculator below:
+        </p>
 
-    <h3>Sample Code:</h3>
-    <p>This iterates through the entire array.</p>
-      <pre>
+        <div class="log-calculator">
+          <div>
+            <span class="log">
+              <span class="constant output-1"></span>
+              log
+              <sub class="mini-output output-2">2</sub>
+              <i class="output output-0"></i>
+            </span>
+            runs
+            <span class="mini-calc calculation-2"></span>
+            times for an input of size
+            <span class="output output-0"></span>
+          </div>
+
+          <div>
+            <div class="controls">
+              <button class="minus" type="button">-</button>
+              <input class="calc-input" type="number" />
+              <button class="plus" type="button">+</button>
+              <p class="error"></p>
+            </div>
+            <button class="default default-btn-2">
+              Reset to <span class="default-2"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="code">
+        <h2>O(n) -- Linear</h2>
+
+        <div class="run-calc">
+          <h4>
+            For input size <span class="output output-0"></span> and constant
+            <span class="constant output-1"></span>:
+          </h4>
+          <h3>
+            <span class="formula"
+              >O(<span class="constant output-1"></span> *
+              <span class="output output-0"></span>)</span
+            >
+            runs <span class="calc calculation-0"></span> times.
+          </h3>
+        </div>
+
+        <h3>Sample Code:</h3>
+        <p>This iterates through the entire array.</p>
+        <pre>
 for (let i = 0; i < array.length; i++) {
   console.log(`Loop #${i}`);
-} </pre>
-  </div>
-
-  <div class="code">
-    <h2>O(n log n) -- Log Linear</h2>
-    
-    <h4>Runs <span class="calculation-0">1</span> times for an input of size <span class="output-0"></span>.</h4>
-
-    <h3>Notes:</h3>
-    <p>Algorithms of O(n log n) include <a href="https://www.educative.io/edpresso/nlogn-sorting-algorithms" target="_blank" ref="nopenner noreferrer">Merge Sort & Heap Sort</a>. The calculation above uses a default of base 2, but you can use the mini calculator below to play with adjusting that!</p>
-
-    <div  class="log-calculator">
-      <div>
-        <span class="output-0"></span>
-        <span class="log">log<sub class="output-3">2</sub><i class="output-0"></i></span>
-        runs
-        <span class="calculation-3"></span>
-        times for an input of size
-        <span class="output-0"></span>
+} </pre
+        >
       </div>
 
-      <div>
-      <button class="minus" type="button">-</button>
-      <input class="calc-input" type="number"/>
-      <button class="plus" type="button">+</button>
-      <p class="error"></p>
+      <div class="code">
+        <h2>O(n log n) -- Log Linear</h2>
+
+        <div class="run-calc">
+          <h4>For input size <span class="output output-0"></span>:</h4>
+          <h3>
+            <span class="formula"
+              >O(<span class="output output-0"></span> log<i
+                class="output output-0"
+              ></i
+              >)</span
+            >
+            runs <span class="calc calculation-0"></span> times.
+          </h3>
+        </div>
+
+        <h3>Notes:</h3>
+        <p>
+          Algorithms of O(n log n) include
+          <a
+            href="https://www.educative.io/edpresso/nlogn-sorting-algorithms"
+            target="_blank"
+            ref="nopenner noreferrer"
+            >Merge Sort & Heap Sort</a
+          >. The calculation above uses a default of base 2, but you can use the
+          mini calculator below to play with adjusting that!
+        </p>
+
+        <div class="log-calculator">
+          <div>
+            <span class="output output-0"></span>
+            <span class="log"
+              >log<sub class="mini-calc output-3"></sub
+              ><i class="output output-0"></i
+            ></span>
+            runs
+            <span class="mini-calc calculation-3"></span>
+            times for an input of size
+            <span class="output output-0"></span>
+          </div>
+
+          <div>
+            <div class="controls">
+              <button class="minus" type="button">-</button>
+              <input class="calc-input" type="number" />
+              <button class="plus" type="button">+</button>
+              <p class="error"></p>
+            </div>
+            <button class="default default-btn-3">
+              Reset to <span class="default-3"></span>
+            </button>
+          </div>
+        </div>
       </div>
 
-    </div>
-  </div>
+      <div class="code">
+        <h2>O(n<sup>2</sup>) -- Quadratic</h2>
 
-  <div class="code">
-    <h2>O(n<sup>2</sup>) -- Quadratic</h2>
-    
-    <h4>Runs <span class="calculation-0">1</span> times for an input of size <span class="output-0"></span>.</h4>
+        <div class="run-calc">
+          <h4>
+            For input size <span class="output output-0"></span> and constant
+            <span class="constant output-1"></span>:
+          </h4>
+          <h3>
+            <span class="formula"
+              >O(<span class="constant output-1"></span> *
+              <span class="output output-0"></span><sup>2</sup>)</span
+            >
+            runs <span class="calc calculation-0"></span> times.
+          </h3>
+        </div>
 
-    <h3>Sample Code:</h3>
-    <p>In this nested loop, the inner loop iterates through the entire array for every iteration of the outer loop.</p>
-      <pre>
+        <h3>Sample Code:</h3>
+        <p>
+          In this nested loop, the inner loop iterates through the entire array
+          for every iteration of the outer loop.
+        </p>
+        <pre>
 for (let i = 0; i < arr.length; i++) {
   for (let j = 0; j < arr.length; j++) {
       n++;
       console.log(`Loop #${n}`);
   }
-} </pre>
-  </div>
+} </pre
+        >
+      </div>
 
-  <div class="code">
-    <h2>O(n<sup>3</sup>) -- Cubic</h2>
-    
-    <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span>.</h4>
+      <div class="code">
+        <h2>O(n<sup>3</sup>) -- Cubic</h2>
 
-    <h3>Sample Code:</h3>
-    <p>Triply nested loop.</p>
-      <pre>
+        <div class="run-calc">
+          <h4>
+            For input size <span class="output output-0"></span> and constant
+            <span class="constant output-1"></span>:
+          </h4>
+          <h3>
+            <span class="formula"
+              >O(<span class="constant output-1"></span> *
+              <span class="output output-0"></span><sup>3</sup>)</span
+            >
+            runs <span class="calc calculation-0"></span> times.
+          </h3>
+        </div>
+
+        <h3>Sample Code:</h3>
+        <p>Triply nested loop.</p>
+        <pre>
 for (let i = 0; i < arr.length; i++) {
   for (let j = 0; j < arr.length; j++) {
     for (let k = 0; k < arr.length; k++)
@@ -194,47 +347,121 @@ for (let i = 0; i < arr.length; i++) {
       console.log(`Loop #${n}`);
     }
   }
-} </pre>
-  </div>
+} </pre
+        >
 
-  <div class="code">
-    <h2>O(2<sup>n</sup>) -- Exponential</h2>
-    
-    <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span>.</h4>
+        <p>
+          Want to see an even higher exponent than 3? You can do so by playing
+          with the calculator below!
+        </p>
 
-    <h3>About:</h3>
-    <p>The above calculation is set to a default base of 2 (so, O(2<sup><span class="output-0"></span></sup>), but you can use the mini calculator below to play with adjusting it!</p>
+        <div class="log-calculator">
+          <div>
+            O(<span class="constant output-1"></span> *
+            <span class="output output-0"></span
+            ><sup><span class="mini-output output-4"></span></sup>) runs
+            <span class="mini-calc calculation-4"></span>
+            times for an input of size
+            <span class="output output-0"></span>
+          </div>
 
-    <div  class="log-calculator">
-      <div>
-        O(<span class="output-4"></span><sup><span class="output-0"></span></sup>)
-        runs
-        <span class="calculation-4"></span>
-        times for an input of size
-        <span class="output-0"></span>
+          <div>
+            <div class="controls">
+              <button class="minus" type="button">-</button>
+              <input class="calc-input" type="number" />
+              <button class="plus" type="button">+</button>
+              <p class="error"></p>
+            </div>
+            <button class="default default-btn-4">
+              Reset to <span class="default-4"></span>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div>
-      <button class="minus" type="button">-</button>
-      <input class="calc-input" type="number"/>
-      <button class="plus" type="button">+</button>
-      <p class="error"></p>
+      <div class="code">
+        <h2>O(2<sup>n</sup>) -- Exponential</h2>
+
+        <div class="run-calc">
+          <h4>
+            For input size <span class="output output-0"></span> and constant
+            <span class="constant output-1"></span>:
+          </h4>
+          <h3>
+            <span class="formula"
+              >O(<span class="constant output-1"></span> * 2<sup
+                ><span class="output output-0"></span></sup
+              >)</span
+            >
+            runs <span class="calc calculation-0"></span> times.
+          </h3>
+        </div>
+
+        <h3>About:</h3>
+        <p>
+          The above calculation is set to a default base of 2 (so, O(2<sup
+            ><span class="output-0"></span></sup
+          >), but you can use the mini calculator below to play with adjusting
+          it!
+        </p>
+
+        <div class="log-calculator">
+          <div>
+            O(<span class="constant output-1"></span> *
+            <span class="mini-output output-5"></span
+            ><sup><span class="output output-0"></span></sup>) runs
+            <span class="mini-calc calculation-5"></span>
+            times for an input of size
+            <span class="output output-0"></span>
+          </div>
+
+          <div>
+            <div class="controls">
+              <button class="minus" type="button">-</button>
+              <input class="calc-input" type="number" />
+              <button class="plus" type="button">+</button>
+              <p class="error"></p>
+            </div>
+            <button class="default default-btn-5">
+              Reset to <span class="default-5"></span>
+            </button>
+          </div>
+        </div>
       </div>
 
-    </div>
+      <div class="code">
+        <h2>O(n!) -- Factorial</h2>
 
-  </div>
+        <div class="run-calc">
+          <h4>
+            For input size <span class="output output-0"></span> and constant
+            <span class="constant output-1"></span>:
+          </h4>
+          <h3>
+            <span class="formula"
+              >O(<span class="constant output-1"></span> *
+              <span class="output output-0"></span>!)</span
+            >
+            runs <span class="calc calculation-0"></span> times.
+          </h3>
+        </div>
 
-  <div class="code">
-    <h2>O(n!) -- Factorial</h2>
-    
-    <h4>Runs <span class="calculation-0"></span> times for an input of size <span class="output-0"></span>.</h4>
-
-    <h3>About:</h3>
-    <p>Ouch, this one gets very slow very fast. You'll notice how quickly the calculation above hits "Infinity", because Javascript just can't calculate a number that large. <a href="https://jarednielsen.com/big-o-factorial-time-complexity/" target="_blank" ref="noopener noreferrer">Here</a> is a great article about some unlucky problems that might require n! to solve.</p>
-  </div>
-  
-  </section>
+        <h3>About:</h3>
+        <p>
+          Ouch, this one gets very slow very fast. You'll notice how quickly the
+          calculation above hits "Infinity", because Javascript just can't
+          calculate a number that large.
+          <a
+            href="https://jarednielsen.com/big-o-factorial-time-complexity/"
+            target="_blank"
+            ref="noopener noreferrer"
+            >Here</a
+          >
+          is a great article about some unlucky problems that might require n!
+          to solve.
+        </p>
+      </div>
+    </section>
 
     <script type="module" src="script.js"></script>
   </body>

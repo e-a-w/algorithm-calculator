@@ -1,111 +1,140 @@
-import Calculator from "./calculator.js";
+const plusButtons = document.getElementsByClassName("plus");
+const minusButtons = document.getElementsByClassName("minus");
+const calcInputs = document.getElementsByClassName("calc-input");
+const errors = document.getElementsByClassName("error");
 
-class ConstCalc extends Calculator {
-  constructor(idx, value, max, min) {
-    super(idx, value, max, min);
-  }
+export default class Calculator {
+  static calculators = [];
 
-  calculate() {
-    const arr = [];
-    for (let i = 0; i < this.displayValues; i++) {
-      arr.push(this.value);
+  constructor(idx, value, max, min, defaultVal) {
+    Calculator.calculators.push(this);
+
+    // DOM Elements
+    this.minus = minusButtons[idx];
+    this.plus = plusButtons[idx];
+    this.input = calcInputs[idx];
+    this.error = errors[idx];
+    this.reset = document.getElementsByClassName(`default-${idx}`)[0];
+    this.resetButton = document.getElementsByClassName(`default-btn-${idx}`)[0];
+    this.valueDisplays = document.getElementsByClassName(`output-${idx}`);
+    this.calculationDisplays = document.getElementsByClassName(
+      `calculation-${idx}`
+    );
+
+    // Values
+    this.idx = idx;
+    this.value = value;
+    this.input.value = this.value;
+    this.input.max = this.max;
+    this.input.min = this.min;
+    this.max = max;
+    this.min = min;
+    this.defaultVal = defaultVal;
+    this.reset.innerText = this.defaultVal;
+
+    for (let i = 0; i < this.valueDisplays.length; i++) {
+      this.valueDisplays[i].innerText = this.value;
     }
-    return arr;
-  }
-}
 
-class RuntimeCalc extends Calculator {
-  constructor(idx, value, max, min) {
-    super(idx, value, max, min);
-  }
-
-  logN(n, base = 2) {
-    return Math.log(n) / Math.log(base);
-  }
-
-  factorial() {
-    let n = this.value;
-    let i = this.value;
-
-    if (n === 1 || n === 0) {
-      return 1;
+    for (let i = 0; i < this.calculationDisplays.length; i++) {
+      this.calculationDisplays[i].innerText = this.calculate()[i];
     }
 
-    while (n > 1) {
-      n--;
-      i *= n;
-    }
-
-    return i;
-  }
-
-  calcAll() {
-    const c = Calculator.calculators[0].value;
-    const counters = [];
-    [1, 2].forEach(x => {
-      counters.push(
-        c,
-        this.logN(this.value).toFixed(5),
-        this.value,
-        (this.value * this.logN(this.value)).toFixed(5),
-        this.value ** 2,
-        this.value ** 3,
-        2 ** this.value,
-        this.factorial()
-      );
+    // Event Listener
+    this.minus.addEventListener("click", () => {
+      if (this.input.value > min) {
+        this.input.value--;
+        this.value--;
+        this.miniCalc();
+      } else {
+        this.showError(`Cannot be less than ${this.min}`);
+      }
+      this.showResults();
     });
-    return counters;
+
+    this.plus.addEventListener("click", () => {
+      if (this.input.value < max) {
+        this.input.value++;
+        this.value++;
+        this.miniCalc();
+      } else {
+        this.showError(`Cannot be more than ${this.max}`);
+      }
+      this.showResults();
+    });
+
+    this.input.addEventListener("keyup", e => {
+      const val = Number(e.target.value);
+      if (val > this.max) {
+        this.showError(`Cannot be larger than ${this.max}`);
+        this.input.value = this.max;
+        this.value = this.max;
+        this.miniCalc();
+      } else if (val < this.min) {
+        this.showError(`Cannot be less than ${this.min}`);
+        this.input.value = this.min;
+        this.value = this.min;
+        this.miniCalc();
+      } else {
+        this.value = val;
+        this.miniCalc();
+      }
+      this.showResults();
+    });
+
+    this.input.addEventListener("keyup", e => {
+      const keys = [69, 187, 189];
+      if (keys.includes(e.keyCode)) {
+        this.showError("Cannot contain characters other than digits");
+        if (this.min > 0) {
+          this.input.value = this.min;
+          this.value = this.min;
+          this.miniCalc();
+        } else if (this.max < 0) {
+          this.input.value = this.max;
+          this.value = this.max;
+          this.miniCalc();
+        } else {
+          this.input.value = 0;
+          this.value = 0;
+          this.miniCalc();
+        }
+      }
+      this.showResults();
+    });
+
+    this.resetButton.addEventListener("click", () => {
+      this.value = this.defaultVal;
+      this.input.value = this.defaultVal;
+      this.miniCalc();
+    });
+  }
+
+  showError(text) {
+    this.error.innerText = text;
+    setTimeout(() => {
+      this.error.innerText = "";
+    }, 5000);
+  }
+
+  showResults() {
+    for (let i = 0; i < this.valueDisplays.length; i++) {
+      this.valueDisplays[i].innerText = this.value;
+    }
+
+    for (let i = 0; i < this.calculationDisplays.length; i++) {
+      this.calculationDisplays[i].innerText = this.calculate()[i];
+    }
   }
 
   calculate() {
-    return this.calcAll();
+    return [this.value];
+  }
+
+  miniCalc() {
+    Calculator.calculators[1].showResults();
+    Calculator.calculators[2].showResults();
+    Calculator.calculators[4].showResults();
+    Calculator.calculators[5].showResults();
   }
 }
-
-class LogCalc extends Calculator {
-  constructor(idx, value, max, min) {
-    super(idx, value, max, min);
-  }
-
-  logN(n, base) {
-    return (Math.log(n) / Math.log(base)).toFixed(5);
-  }
-
-  calculate() {
-    return [this.logN(Calculator.calculators[1].value, this.value)];
-  }
-}
-
-class NLogCalc extends Calculator {
-  constructor(idx, value, max, min) {
-    super(idx, value, max, min);
-  }
-
-  logN(n, base) {
-    return Calculator.calculators[1].value * (Math.log(n) / Math.log(base));
-  }
-
-  calculate() {
-    return [this.logN(Calculator.calculators[1].value, this.value).toFixed(5)];
-  }
-}
-
-class ExpCalc extends Calculator {
-  constructor(idx, value, max, min) {
-    super(idx, value, max, min);
-  }
-
-  calcExp() {
-    return this.value ** Calculator.calculators[1].value;
-  }
-
-  calculate() {
-    return [this.calcExp()];
-  }
-}
-
-const c0 = new ConstCalc(1, 1, 10000, 0);
-const c1 = new RuntimeCalc(0, 3, 10000, 0);
-const c2 = new LogCalc(2, 2, 10000, 0);
-const c3 = new NLogCalc(3, 2, 10000, 0);
-const c4 = new ExpCalc(4, 2, 10000, 0);

@@ -1,111 +1,57 @@
-import Calculator from "./calculator.js";
+import {
+  ConstCalc,
+  RuntimeCalc,
+  LogCalc,
+  NLogCalc,
+  CubicCalc,
+  ExpCalc,
+} from "./miniCalculators.js";
 
-class ConstCalc extends Calculator {
-  constructor(idx, value, max, min) {
-    super(idx, value, max, min);
-  }
+// CALCULATORS:
 
-  calculate() {
-    const arr = [];
-    for (let i = 0; i < this.displayValues; i++) {
-      arr.push(this.value);
-    }
-    return arr;
-  }
-}
+// index must be order they appear in HTML
+// ConstCalc instantiated before RuntimeCalc because RuntimeCalc uses ConstCalc values
+// index, value, max, min, default value
+const c0 = new ConstCalc(1, 1, 10000, 0, 1);
+const c1 = new RuntimeCalc(0, 20, 10000, 0, 20);
+const c2 = new LogCalc(2, 2, 10000, 0, 2);
+const c3 = new NLogCalc(3, 2, 10000, 0, 2);
+const c4 = new CubicCalc(4, 3, 10000, 0, 3);
+const c5 = new ExpCalc(5, 2, 10000, 0, 2);
 
-class RuntimeCalc extends Calculator {
-  constructor(idx, value, max, min) {
-    super(idx, value, max, min);
-  }
+/* MODALS */
+const closeBtn = document.getElementById("welcome-close-btn");
+const welcomeModal = document.getElementById("welcome-modal-container");
 
-  logN(n, base = 2) {
-    return Math.log(n) / Math.log(base);
-  }
+const setCookie = () => {
+  const hour = new Date();
+  hour.setHours(hour.getHours() + 1);
+  document.cookie = `visited=true; expires=${hour}; SameSite=None; Secure`;
+};
 
-  factorial() {
-    let n = this.value;
-    let i = this.value;
-
-    if (n === 1 || n === 0) {
-      return 1;
-    }
-
-    while (n > 1) {
-      n--;
-      i *= n;
-    }
-
-    return i;
-  }
-
-  calcAll() {
-    const c = Calculator.calculators[0].value;
-    const counters = [];
-    [1, 2].forEach(x => {
-      counters.push(
-        c,
-        this.logN(this.value).toFixed(5),
-        this.value,
-        (this.value * this.logN(this.value)).toFixed(5),
-        this.value ** 2,
-        this.value ** 3,
-        2 ** this.value,
-        this.factorial()
-      );
+const checkCookie = () => {
+  if (!document.cookie) {
+    welcomeModal.style.visibility = "visible";
+    setCookie();
+    closeBtn.addEventListener("click", () => {
+      welcomeModal.remove();
     });
-    return counters;
+  } else {
+    welcomeModal.remove();
   }
+};
 
-  calculate() {
-    return this.calcAll();
+checkCookie();
+
+/* Quick Ref */
+
+const quickRefBtn = document.getElementById("quick-ref");
+
+quickRefBtn.addEventListener("click", () => {
+  if (quickRefBtn.innerText.includes("+")) {
+    quickRefBtn.innerText =
+      "🚧 Coming Soon!\n(For now, only browers > 900px can see the quick ref table.)";
+  } else {
+    quickRefBtn.innerText = "+ Quick Reference";
   }
-}
-
-class LogCalc extends Calculator {
-  constructor(idx, value, max, min) {
-    super(idx, value, max, min);
-  }
-
-  logN(n, base) {
-    return (Math.log(n) / Math.log(base)).toFixed(5);
-  }
-
-  calculate() {
-    return [this.logN(Calculator.calculators[1].value, this.value)];
-  }
-}
-
-class NLogCalc extends Calculator {
-  constructor(idx, value, max, min) {
-    super(idx, value, max, min);
-  }
-
-  logN(n, base) {
-    return Calculator.calculators[1].value * (Math.log(n) / Math.log(base));
-  }
-
-  calculate() {
-    return [this.logN(Calculator.calculators[1].value, this.value).toFixed(5)];
-  }
-}
-
-class ExpCalc extends Calculator {
-  constructor(idx, value, max, min) {
-    super(idx, value, max, min);
-  }
-
-  calcExp() {
-    return this.value ** Calculator.calculators[1].value;
-  }
-
-  calculate() {
-    return [this.calcExp()];
-  }
-}
-
-const c0 = new ConstCalc(1, 1, 10000, 0);
-const c1 = new RuntimeCalc(0, 3, 10000, 0);
-const c2 = new LogCalc(2, 2, 10000, 0);
-const c3 = new NLogCalc(3, 2, 10000, 0);
-const c4 = new ExpCalc(4, 2, 10000, 0);
+});
